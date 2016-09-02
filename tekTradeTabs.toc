@@ -1,0 +1,14 @@
+## Interface: 50001
+
+## Title: tekTradeTabs
+## Notes: Adds spellbook-style tabs to the TradeSkillFrame for easy swapping between production skills (Based on TradeTabs by tardmrr)
+## Author: Tekkub Stoutwrithe
+
+## LoadOnDemand: 1
+## LoadWith: Blizzard_TradeSkillUI
+
+externals/events.lua
+externals/ui-bottomtab.lua
+
+tab.lua
+tekTradeTabs.lua
