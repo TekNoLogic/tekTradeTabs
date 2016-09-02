@@ -34,7 +34,6 @@ local function TradeSpells()
 	for i,prof in pairs(profs) do
 		local name, icon, _, _, abilities, offset, skillLine = GetProfessionInfo(prof)
 		if whitelist[skillLine] then
-		-- if whitelist[skillLine] and not IsPassiveSpell(offset + 1, BOOKTYPE_PROFESSION) then
 			local _, spellid = GetSpellBookItemInfo(offset + 1, BOOKTYPE_PROFESSION)
 			table.insert(spells, (GetSpellInfo(spellid)))
 		end
