@@ -18,8 +18,6 @@ local TRADES = {
 }
 
 
-
-
 local function TradeSpells()
 	local spells = {}
 	local p1, p2, arch, fishing, cooking, firstaid = GetProfessions()
