@@ -42,7 +42,7 @@ end
 function ns.NewBottomTab(parent, template)
 	local tab = CreateFrame("Button", nil, parent, template)
 	tab:SetSize(10, 32)
-	tab:SetFrameLevel(tab:GetFrameLevel() + 4)
+	tab:SetFrameLevel(tab:GetFrameLevel() - 2)
 
 	tab.dis_left = tab:CreateTexture(nil, "BACKGROUND")
 	tab.dis_left:Hide()
