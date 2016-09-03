@@ -24,7 +24,7 @@ local function TradeSpells()
 	local profs = {p1, p2, cooking, firstaid}
 
 	local _, class = UnitClass("player")
-	if class == "DEATHKNIGHT" then spells[1] = GetSpellInfo(RUNEFORGING) end
+	if class == "DEATHKNIGHT" then spells[1] = RUNEFORGING end
 
 	for _,prof in pairs(profs) do
 		local _, _, _, _, _, offset, skillline = GetProfessionInfo(prof)
