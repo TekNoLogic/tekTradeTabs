@@ -2,7 +2,8 @@
 local myname, ns = ...
 
 
-local whitelist = {
+local RUNEFORGING = 53428 -- Runeforging spellid
+local TRADES = {
 	[171] = true, -- Alchemy
 	[164] = true, -- Blacksmithing
 	[185] = true, -- Cooking
@@ -17,23 +18,19 @@ local whitelist = {
 }
 
 
-local RUNEFORGING = 53428 -- Runeforging spellid
 
 
 local function TradeSpells()
+	local spells = {}
 	local p1, p2, arch, fishing, cooking, firstaid = GetProfessions()
 	local profs = {p1, p2, cooking, firstaid}
 
-	local spells = {}
-
 	local _, class = UnitClass("player")
-	if class == "DEATHKNIGHT" then
-		spells[1] = GetSpellInfo(RUNEFORGING)
-	end
+	if class == "DEATHKNIGHT" then spells[1] = GetSpellInfo(RUNEFORGING) end
 
-	for i,prof in pairs(profs) do
-		local name, icon, _, _, abilities, offset, skillLine = GetProfessionInfo(prof)
-		if whitelist[skillLine] then
+	for _,prof in pairs(profs) do
+		local _, _, _, _, _, offset, skillline = GetProfessionInfo(prof)
+		if TRADES[skillline] then
 			local _, spellid = GetSpellBookItemInfo(offset + 1, BOOKTYPE_PROFESSION)
 			table.insert(spells, (GetSpellInfo(spellid)))
 		end
@@ -44,18 +41,13 @@ end
 
 
 function ns.OnLoad()
-	local parent = TradeSkillFrame
-	local anchor
+	local anchor = CreateFrame("Frame", nil, TradeSkillFrame)
+	anchor:SetSize(15, 32)
+	anchor:SetPoint("BOTTOMLEFT", 11, -30)
 
 	for _,spellid in ipairs(TradeSpells()) do
-		local tab = ns.NewTab(parent, GetSpellInfo(spellid))
-
-		if anchor then
-			tab:SetPoint("LEFT", anchor, "RIGHT", -15, 0)
-		else
-			tab:SetPoint("TOPLEFT", parent, "BOTTOMLEFT", 11, 2)
-		end
-
+		local tab = ns.NewTab(TradeSkillFrame, GetSpellInfo(spellid))
+		tab:SetPoint("LEFT", anchor, "RIGHT", -15, 0)
 		anchor = tab
 	end
 end
